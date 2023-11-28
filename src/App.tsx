@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -18,6 +18,16 @@ function App() {
     ]);
     setText("");
   };
+
+  useEffect(() => {
+    const feed = document.querySelector(".feed");
+    if (feed) {
+      const observer = new MutationObserver(() => {
+        feed.scrollTop = feed.scrollHeight;
+      });
+      observer.observe(feed, { childList: true, subtree: true });
+    }
+  }, []);
 
   return (
     <>
